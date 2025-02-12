@@ -1,13 +1,13 @@
 ---
 title: "Is Mod APK Safe? A Detailed Guide for You"
-excerpt: "An APK file is the package format used by Android to install apps. A "mod APK" is simply a modified version of an original APK. These modifications are usually done to unlock premium features or remove ads, giving users access to services or content they would normally have to pay for. The modification is done by third-party developers, not the official creators of the app."
-coverImage: "/what-is/assets/blog/is-mod-apk-safe-a-detailed-guide.jpg"
+excerpt: "An APK file is the package format used by Android to install apps. A 'mod APK' is simply a modified version of an original APK. These modifications are usually done to unlock premium features or remove ads, giving users access to services or content they would normally have to pay for. The modification is done by third-party developers, not the official creators of the app."
+coverImage: "/what-is/assets/blog/is-mod-apk-safe-a-detailed-guide/cover.jpg"
 date: "2025-02-11T05:35:07.322Z"
 author:
-  name: Nitin
+  name: "Nitin"
   picture: "/what-is/assets/blog/authors/jj.jpeg"
 ogImage:
-  url: "/what-is/assets/blog/is-mod-apk-safe-a-detailed-guide.jpg"
+  url: "/what-is/assets/blog/is-mod-apk-safe-a-detailed-guide/cover.jpg"
 ---
 
 Is Mod APK Safe? A Detailed Guide for You
