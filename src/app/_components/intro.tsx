@@ -15,7 +15,7 @@ export function Intro() {
       </div>
 
       {/* Second Row: Navigation */}
-      <nav className="mt-6 flex flex-wrap justify-center md:justify-start gap-4 w-full">
+   {/*    <nav className="mt-6 flex flex-wrap justify-center md:justify-start gap-4 w-full">
         <a
           href="/category/technology"
           className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
@@ -52,7 +52,7 @@ export function Intro() {
         >
           Lifestyle
         </a>
-      </nav>
+      </nav> */}
     </section>
   );
 }

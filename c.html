@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Matter Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .output-box {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .file-input-group {
+            position: relative;
+            overflow: hidden;
+        }
+        .file-input-group input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Front Matter Generator</h2>
+        
+        <form id="frontMatterForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Excerpt</label>
+                        <textarea class="form-control" id="excerpt" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Cover Image</label>
+                        <div class="file-input-group">
+                            <input type="file" class="form-control" id="coverImageFile" accept="image/*">
+                            <input type="text" class="form-control" id="coverImage" 
+                                   placeholder="/what-is/assets/blog/.../cover.jpg" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input type="datetime-local" class="form-control" id="date" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Author Name</label>
+                        <input type="text" class="form-control" id="authorName" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Author Picture</label>
+                        <div class="file-input-group">
+                            <input type="file" class="form-control" id="authorPictureFile" accept="image/*">
+                            <input type="text" class="form-control" id="authorPicture" 
+                                   placeholder="/what-is/assets/blog/authors/..." readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">OG Image Path</label>
+                        <input type="text" class="form-control" id="ogImage" 
+                               placeholder="/what-is/assets/blog/.../cover.jpg" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="generateFrontMatter()">Generate</button>
+        </form>
+
+        <div class="output-box" id="output"></div>
+    </div>
+
+    <script>
+        function generateSlug(title) {
+            return title.toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '');
+        }
+
+        function handleImageUpload(input, targetField, isAuthor = false) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const title = document.getElementById('title').value;
+            const slug = generateSlug(title);
+            const fileName = file.name.toLowerCase().replace(/ /g, '-');
+            
+            let path = isAuthor 
+                ? `/what-is/assets/blog/authors/${fileName}`
+                : `/what-is/assets/blog/${slug}/${fileName}`;
+
+            targetField.value = path;
+            
+            // Auto-update OG Image if it's the cover image
+            if (!isAuthor) {
+                document.getElementById('ogImage').value = path;
+            }
+        }
+
+        // Set up event listeners
+        document.getElementById('coverImageFile').addEventListener('change', function() {
+            handleImageUpload(this, document.getElementById('coverImage'));
+        });
+
+        document.getElementById('authorPictureFile').addEventListener('change', function() {
+            handleImageUpload(this, document.getElementById('authorPicture'), true);
+        });
+
+        // Update paths when title changes
+        document.getElementById('title').addEventListener('input', function() {
+            const coverFile = document.getElementById('coverImageFile').files[0];
+            const authorFile = document.getElementById('authorPictureFile').files[0];
+            
+            if (coverFile) handleImageUpload(document.getElementById('coverImageFile'), document.getElementById('coverImage'));
+            if (authorFile) handleImageUpload(document.getElementById('authorPictureFile'), document.getElementById('authorPicture'), true);
+        });
+
+        function generateFrontMatter() {
+            const frontMatter = `---
+title: "${document.getElementById('title').value.replace(/"/g, '\\"')}"
+excerpt: "${document.getElementById('excerpt').value.replace(/"/g, '\\"')}"
+coverImage: "${document.getElementById('coverImage').value}"
+date: "${document.getElementById('date').value.replace('T', 'T').slice(0, -3)}Z"
+author:
+  name: "${document.getElementById('authorName').value.replace(/"/g, '\\"')}"
+  picture: "${document.getElementById('authorPicture').value}"
+ogImage:
+  url: "${document.getElementById('ogImage').value}"
+---`;
+
+            document.getElementById('output').textContent = frontMatter;
+        }
+
+        // Set default date to current datetime
+        const now = new Date();
+        const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        document.getElementById('date').value = localDateTime;
+    </script>
+</body>
+</html>
