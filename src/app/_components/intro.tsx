@@ -8,10 +8,10 @@ export function Intro() {
         <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
           What is?
         </h1>
-        <h4 className="text-lg mt-5 md:pl-8">
+{/*         <h4 className="text-lg mt-5 md:pl-8">
           Simplifying complex topics across <strong>Technology</strong>, <strong>Science</strong>,
           <strong>Business</strong>, <strong>Health</strong>, and more. Learn something new every day!
-        </h4>
+        </h4> */}
       </div>
 
       {/* Second Row: Navigation */}
