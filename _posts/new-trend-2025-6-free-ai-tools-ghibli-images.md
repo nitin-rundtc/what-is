@@ -1,7 +1,7 @@
 ---
 title: "New Trend in 2025: 6 Free AI Tools to Create Studio Ghibli-Style Images for Free"
 excerpt: "Join the 2025 trend! Discover 6 free AI tools to create stunning Studio Ghibli-style images effortlessly. Transform your photos or ideas into magical anime art—no cost, no skills needed!"
-coverImage: "/what-is/assets/blog/is-mod-apk-safe-a-detailed-guide/cover.jpg"
+coverImage: "/what-is/assets/blog/images/new-trend-2025-6-free-ai-tools-ghibli-images.jpeg"
 date: "2025-03-26T05:35:07.322Z"
 author:
   name: "ni18"
